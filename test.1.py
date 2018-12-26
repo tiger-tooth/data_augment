@@ -30,7 +30,7 @@ def dataaug(imgname, xmlname, outputdir, classes):
     # img, bboxes = transforms(img, bboxes)
 
 #########################################################################
-    img1, bboxes1 = RandomHSV(100, 100, 100)(img, bboxes)
+    img1, bboxes1 = RandomHSV(100, 100, 100)(img.copy(), bboxes.copy())
 
     print(bboxes1)
     newimg_name1 = outputdir+imgname[-10:-4]+'Horizontal.jpg'
