@@ -1,21 +1,47 @@
 from data_aug.data_aug import *
 from data_aug.bbox_util import *
 import cv2
+import os
 import pickle as pkl
 import numpy as np
 import matplotlib.pyplot as plt
 from xml2array import *
+from shutil import copyfile
+from array2xml import *
 
-img = cv2.imread("000204.jpg")[:, :, ::-1]  # OpenCV uses BGR channels
-#bboxes = pkl.load(open("messi_ann.pkl", "rb"))
-bboxes = xml2array('.', '000204.xml')
 
-print(bboxes)
+def dataaug(imgname, xmlname, outputdir, classes):
 
-transforms = Sequence([RandomHorizontalFlip(
-    1), RandomScale(0.2, diff=True), RandomRotate(10)])
+    if not os.path.exists(outputdir):
+        os.makedirs(outputdir)
 
-img, bboxes = transforms(img, bboxes)
+    img = cv2.imread(imgname)[:, :, ::-1]  # OpenCV uses BGR channels
+    bboxes = xml2array(xmlname, classes)
 
-plt.imshow(draw_rect(img, bboxes))
-plt.show()
+    print(bboxes)
+
+    # transforms = Sequence([RandomHorizontalFlip(
+    #     1), RandomScale(0.2, diff=True), RandomRotate(10)])
+
+    # img, bboxes = transforms(img, bboxes)
+
+#########################################################################
+    img1, bboxes1 = RandomHSV(100, 100, 100)(img, bboxes)
+
+    print(bboxes1)
+    newimg_name1 = outputdir+imgname[-10:-4]+'Horizontal.jpg'
+    cv2.imwrite(newimg_name1, cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+
+    newxml_name1 = outputdir+xmlname[-10:-4]+'Horizontal.xml'
+    copyfile(xmlname, newxml_name1)
+
+    array2xml(bboxes1, newxml_name1, classes)
+
+    plt.imshow(draw_rect(img1, bboxes1))
+    plt.show()
+
+
+if __name__ == '__main__':
+
+    classes = ['Soldier', 'Civilian', 'Civilian_Vehicle', 'Military_Vehicle']
+    dataaug('./000213.jpg', './000213.xml', 'out/', classes)

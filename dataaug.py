@@ -32,7 +32,7 @@ def dataaug(imgname, xmlname, outputdir, classes):
     newimg_name1 = outputdir+imgname[-10:-4]+'Horizontal.jpg'
     cv2.imwrite(newimg_name1, cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
 
-    newxml_name1 = outputdir+xmlname[-10:-4]+'Horizontal.xml'
+    newxml_name1 = outputdir+xmlname[-10:-4]+'åHorizontal.xml'
     copyfile(xmlname, newxml_name1)
 
     array2xml(bboxes1, newxml_name1, classes)
