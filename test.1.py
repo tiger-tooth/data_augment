@@ -10,6 +10,10 @@ from shutil import copyfile
 from array2xml import *
 
 
+'''
+test1
+'''
+
 def dataaug(imgname, xmlname, outputdir, classes):
 
     if not os.path.exists(outputdir):
