@@ -140,3 +140,4 @@ if __name__ == '__main__':
 
     classes = ['Soldier', 'Civilian', 'Civilian_Vehicle', 'Military_Vehicle']
     dataaug('./000213.jpg', './000213.xml', 'out/', classes)
+    dataaug('./000204.jpg', './000204.xml', 'out/', classes)
