@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/Users/tiger/anaconda3/envs/data/bin/python",
+    "python.pythonPath": "/home/lthpc/anaconda3/envs/data/bin/python",
     "python.linting.pylintEnabled": false
 }

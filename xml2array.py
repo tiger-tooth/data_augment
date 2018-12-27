@@ -27,7 +27,8 @@ def xml2array(xmlname,classes):
                 xmax=float(ele2.find('xmax').text)
                 ymax=float(ele2.find('ymax').text)
             bnd_list.append([xmin,ymin,xmax,ymax,c])
-    return np.stack(bnd_list)
+            #print(bnd_list)
+        return np.stack(bnd_list)
 
         
 
